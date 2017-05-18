@@ -3,7 +3,7 @@
 #pragma newdecls required
 #define PLYCOUNT    MAXPLAYERS + 1 
 
-public Plugin myinfo = { url = "https://kruzefag.ru/", name = "Radio", author = "CrazyHackGUT aka Kruzya", version = "1.0", description = "Radio plugin for all Source games"};
+public Plugin myinfo = { url = "https://kruzefag.ru/", name = "Radio", author = "CrazyHackGUT aka Kruzya", version = "1.1", description = "Radio plugin for all Source games"};
 
 /**
  * Global settings for all players
@@ -11,13 +11,13 @@ public Plugin myinfo = { url = "https://kruzefag.ru/", name = "Radio", author = 
 int         g_iSelected[PLYCOUNT];
 bool        g_bSilence[PLYCOUNT];
 int         g_iVolume[PLYCOUNT] = { 100, ... };
-int         g_iStartV[PLYCOUNT] = { 100, ... };
 
 /**
  * Config Values
  */
-StringMap   g_hRadioStations;
 char        g_szWebScript[256];
+StringMap   g_hRadioStations;
+int         g_iDefaultVolume;
 int         g_iStepSize;
 
 #include "Radio/MusicManager.sp"
@@ -28,15 +28,14 @@ int         g_iStepSize;
 public void OnPluginStart() {
     LoadTranslations("Radio.phrases");
     RegisterCommands();
-
-    for (int iClient = 1; iClient <= MaxClients; iClient++) {
-        if (IsClientInGame(iClient) && !IsFakeClient(iClient) && IsClientAuthorized(iClient))
-            OnClientAuthorized(iClient, NULL_STRING);
-    }
 }
 
 public void OnMapStart() {
     ReadConfig();
+
+    for (int iClient = 1; iClient <= MaxClients; iClient++)
+        if (IsClientInGame(iClient) && !IsFakeClient(iClient) && IsClientAuthorized(iClient))
+            OnClientAuthorized(iClient, NULL_STRING);
 
     CreateTimer(180.0, NowPlaying, _, TIMER_REPEAT|TIMER_FLAG_NO_MAPCHANGE);
 }
@@ -44,7 +43,7 @@ public void OnMapStart() {
 public void OnClientAuthorized(int iClient, const char[] szAuth) {
     g_iSelected[iClient]    = -1;
     g_bSilence[iClient]     = false;
-    g_iVolume[iClient]      = 100;
+    g_iVolume[iClient]      = g_iDefaultVolume;
 }
 
 public Action NowPlaying(Handle hTimer) {

@@ -64,6 +64,12 @@ public SMCResult CFG_OnKeyValue(SMCParser hSMC, const char[] szKey, const char[]
             strcopy(g_szWebScript, sizeof(g_szWebScript), szValue);
         } else if (StrEqual(szKey, "StepVolume")) {
             g_iStepSize = StringToInt(szValue);
+        } else if (StrEqual(szKey, "DefaultVolume")) {
+            g_iDefaultVolume = StringToInt(szValue);
+            if (g_iDefaultVolume > 100)
+                g_iDefaultVolume = 100;
+            else if (g_iDefaultVolume < 0)
+                g_iDefaultVolume = 0;
         }
     } else if (g_iCurrentCfgState == RADIOCFG_STATIONS) {
         g_hRadioStations.SetString(szKey, szValue, true);

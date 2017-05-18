@@ -1,6 +1,6 @@
 # Radio
 
-**Текущая версия**: _1.0_
+**Текущая версия**: _1.1_
 
 **Лицензия**: _[GNU GPL 3.0](http://git.kruzefag.ru/Kruzya/DynamicMOTD/src/master/LICENSE)_
 

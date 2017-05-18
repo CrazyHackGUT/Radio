@@ -41,36 +41,31 @@ bool MusicManager_ChangeStation(int iClient, int iID) {
         return false;
 
     char szBuffer[256];
-    if (iID >= 0) {
-        MusicManager_GetBaseURL(iClient, szBuffer, sizeof(szBuffer));
-        Format(szBuffer, sizeof(szBuffer), "%s&v=%d", szBuffer, g_iVolume[iClient]);
-    } else {
-        strcopy(szBuffer, sizeof(szBuffer), g_szWebScript);
-    }
+
+    MusicManager_GetClientStationURL(iClient, szBuffer, sizeof(szBuffer));
+    Format(szBuffer, sizeof(szBuffer), "%s#ChangeStation=%s", g_szWebScript, szBuffer);
 
     UTIL_SendLink(iClient, NULL_STRING, szBuffer, false);
     return true;
 }
 
-void MusicManager_GetBaseURL(int iClient, char[] szBuffer, int iMaxLength) {
-    MusicManager_GetClientStationURL(iClient, szBuffer, iMaxLength);
-    Format(szBuffer, iMaxLength, "%s?s=%s&v=%d", g_szWebScript, szBuffer, g_iStartV[iClient]);
-}
-
 void MusicManager_SetSoundState(int iClient, bool bState) {
     char szBuffer[256];
-    MusicManager_GetBaseURL(iClient, szBuffer, sizeof(szBuffer));
-    Format(szBuffer, sizeof(szBuffer), "%s#TurnO%s", szBuffer, bState ? "n" : "ff");
+    Format(szBuffer, sizeof(szBuffer), "%s#TurnO%s", g_szWebScript, bState ? "n" : "ff");
 
     UTIL_SendLink(iClient, NULL_STRING, szBuffer, false);
 }
 
 void MusicManager_SetVolume(int iClient, int iVolume) {
     char szBuffer[256];
-    MusicManager_GetBaseURL(iClient, szBuffer, sizeof(szBuffer));
-    Format(szBuffer, sizeof(szBuffer), "%s#Volume=%d", szBuffer, iVolume);
+    Format(szBuffer, sizeof(szBuffer), "%s#Volume=%d", g_szWebScript, iVolume);
 
     UTIL_SendLink(iClient, NULL_STRING, szBuffer, false);
+}
+
+public Action MusicManager_SendVolume(Handle hTimer, any iClient) {
+    if (IsClientInGame(iClient) && !IsFakeClient(iClient) && !g_bSilence[iClient])
+        MusicManager_SetVolume(iClient, g_iVolume[iClient]);
 }
 
 void UTIL_SendLink(const int iClient, const char[] szTitle, const char[] szURL, bool bVisible = true) {
