@@ -85,4 +85,18 @@
         "en"        "(current)"
         "ru"        "(текущая)"
     }
+
+    // Chat messages
+    "NowPlaying"
+    {
+        "#format"   "{1:s},{2:d}"
+        "en"        "Now playing {1}, volume {2}%%"
+        "ru"        "Сейчас играет {1}, громкость {2}%%"
+    }
+
+    "UseRadioCommand"
+    {
+        "en"        "This server have radio plugin. Type !radio to chat!"
+        "ru"        "На этом сервере есть Радио плагин. Введите !radio в чат!"
+    }
 }

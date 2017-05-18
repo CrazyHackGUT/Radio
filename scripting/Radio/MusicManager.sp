@@ -23,7 +23,7 @@ bool MusicManager_GetClientStationURL(int iClient, char[] szOutput, int iMaxLeng
     return g_hRadioStations.GetString(szOutput, szOutput, iMaxLength);
 }
 
-bool MusicManager_ChangeStation(int iClient, int iID) {
+bool MusicManager_ChangeStationMem(int iClient, int iID) {
     StringMapSnapshot hSnapshot = g_hRadioStations.Snapshot();
     int iLength = hSnapshot.Length;
     delete hSnapshot;
@@ -32,12 +32,21 @@ bool MusicManager_ChangeStation(int iClient, int iID) {
         return false;
     }
 
-    char szBuffer[256];
     g_iSelected[iClient] = iID;
-    if (iID)
+    return true;
+}
+
+bool MusicManager_ChangeStation(int iClient, int iID) {
+    if (!MusicManager_ChangeStationMem(iClient, iID))
+        return false;
+
+    char szBuffer[256];
+    if (iID >= 0) {
         MusicManager_GetBaseURL(iClient, szBuffer, sizeof(szBuffer));
-    else
-        szBuffer[0] = 0;
+        Format(szBuffer, sizeof(szBuffer), "%s&v=%d", szBuffer, g_iVolume[iClient]);
+    } else {
+        strcopy(szBuffer, sizeof(szBuffer), g_szWebScript);
+    }
 
     UTIL_SendLink(iClient, NULL_STRING, szBuffer, false);
     return true;
@@ -45,7 +54,7 @@ bool MusicManager_ChangeStation(int iClient, int iID) {
 
 void MusicManager_GetBaseURL(int iClient, char[] szBuffer, int iMaxLength) {
     MusicManager_GetClientStationURL(iClient, szBuffer, iMaxLength);
-    Format(szBuffer, iMaxLength, "%s?s=%s", g_szWebScript, szBuffer);
+    Format(szBuffer, iMaxLength, "%s?s=%s&v=%d", g_szWebScript, szBuffer, g_iStartV[iClient]);
 }
 
 void MusicManager_SetSoundState(int iClient, bool bState) {

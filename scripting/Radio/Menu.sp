@@ -6,8 +6,8 @@ void Menu_Draw_MM(int iClient) {
     hMenu.ExitButton = true;
 
     // Volume
-    FormatEx(szBuffer, sizeof(szBuffer), "%T", "MM_Volume", iClient, g_iVolume);
-    hMenu.AddItem("v", szBuffer);
+    FormatEx(szBuffer, sizeof(szBuffer), "%T", "MM_Volume", iClient, g_iVolume[iClient]);
+    hMenu.AddItem("v", szBuffer, (g_iSelected[iClient] < 0 || g_bSilence[iClient]) ? ITEMDRAW_DISABLED : ITEMDRAW_DEFAULT);
 
     // Stations
     MusicManager_GetClientStationName(iClient, szBuffer, sizeof(szBuffer));
@@ -27,7 +27,7 @@ void Menu_Draw_VM(int iClient) {
     char szBuffer[256];
     Menu hMenu = new Menu(VMHandler);
 
-    hMenu.SetTitle("%T", "VM_Title", iClient);
+    hMenu.SetTitle("%T", "VM_Title", iClient, g_iVolume[iClient]);
     hMenu.ExitBackButton = true;
     hMenu.ExitButton = false;
 
@@ -46,7 +46,8 @@ void Menu_Draw_SM(int iClient) {
     char szBuffer[256];
     Menu hMenu = new Menu(SMHandler);
 
-    hMenu.SetTitle("%T", "SM_Title", iClient);
+    MusicManager_GetClientStationName(iClient, szBuffer, sizeof(szBuffer));
+    hMenu.SetTitle("%T", "SM_Title", iClient, szBuffer);
     hMenu.ExitBackButton = true;
     hMenu.ExitButton = false;
 
@@ -81,6 +82,7 @@ public int MMHandler(Menu hMenu, MenuAction iAction, int iParam1, int iParam2) {
         if (szBuff[0] == 'o') {
             g_bSilence[iParam1] = !g_bSilence[iParam1];
             MusicManager_SetSoundState(iParam1, !g_bSilence[iParam1]);
+            Menu_Draw_MM(iParam1);
         } else if (szBuff[0] == 'v') {
             if (g_iStepSize > 0 && g_iStepSize < 100) {
                 Menu_Draw_VM(iParam1);
@@ -112,6 +114,8 @@ public int VMHandler(Menu hMenu, MenuAction iAction, int iParam1, int iParam2) {
 
         MusicManager_SetVolume(iParam1, iVolume);
         g_iVolume[iParam1] = iVolume;
+
+        Menu_Draw_VM(iParam1);
     }
 }
 
@@ -121,6 +125,9 @@ public int SMHandler(Menu hMenu, MenuAction iAction, int iParam1, int iParam2) {
     } else if (iAction == MenuAction_Cancel && iParam2 == MenuCancel_ExitBack) {
         Menu_Draw_MM(iParam1);
     } else if (iAction == MenuAction_Select) {
-        MusicManager_ChangeStation(iParam1, iParam2);
+        if (!g_bSilence[iParam1])
+            MusicManager_ChangeStation(iParam1, iParam2 - 1);
+        else
+            MusicManager_ChangeStationMem(iParam1, iParam2 - 1);
     }
 }
