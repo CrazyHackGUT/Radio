@@ -7,6 +7,12 @@
         "ru"        "Не выбрана"
     }
 
+    "FeatureOff"
+    {
+        "en"        "This feature has been disabled by administrator."
+        "ru"        "Данная функция была отключена администратором."
+    }
+
     // Main menu
     "MM_Title"
     {

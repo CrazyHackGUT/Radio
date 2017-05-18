@@ -3,16 +3,19 @@
 #pragma newdecls required
 #define PLYCOUNT    MAXPLAYERS + 1 
 
-public Plugin myinfo = { url = "https://kruzefag.ru/", name = "Radio", author = "CrazyHackGUT aka Kruzya", version = "0.3", description = "Radio plugin for all Source games"};
+public Plugin myinfo = { url = "https://kruzefag.ru/", name = "Radio", author = "CrazyHackGUT aka Kruzya", version = "0.5", description = "Radio plugin for all Source games"};
 
-StringMap   g_hRadioStations;
-bool        g_bSilence[PLYCOUNT];
+/**
+ * Global settings for all players
+ */
 int         g_iSelected[PLYCOUNT];
-int         g_iVolume[PLYCOUNT];
+bool        g_bSilence[PLYCOUNT];
+int         g_iVolume[PLYCOUNT] = { 100, ... };
 
 /**
  * Config Values
  */
+StringMap   g_hRadioStations;
 char        g_szWebScript[256];
 int         g_iStepSize;
 
@@ -26,5 +29,5 @@ public void OnPluginStart() {
 }
 
 public void OnMapStart() {
-    LoadConfig();
+    ReadConfig();
 }

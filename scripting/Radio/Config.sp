@@ -1,9 +1,13 @@
+#define RADIOCFG_NONE       0
+#define RADIOCFG_MAIN       1
+#define RADIOCFG_STATIONS   2
+
 SMCParser   g_hSMC;
-char        g_szConfig[MAX_PLATFORM_PATH];
+char        g_szConfig[PLATFORM_MAX_PATH];
 int         g_iCurrentCfgState;
 
 void ReadConfig() {
-	ClearStations();
+    ClearStations();
     InitParser();
     InitPath();
 
@@ -13,7 +17,7 @@ void ReadConfig() {
 
 void ClearStations() {
     if (g_hRadioStations) {
-    	g_hRadioStations.Clear();
+        g_hRadioStations.Clear();
     } else {
         g_hRadioStations = new StringMap();
     }
@@ -38,7 +42,7 @@ void InitPath() {
 
 public SMCResult CFG_OnSectionEnter(SMCParser hSMC, const char[] szName, bool bOptQuotes) {
     if (StrEqual(szName, "Radio")) {
-    	g_iCurrentCfgState = RADIOCFG_MAIN;
+        g_iCurrentCfgState = RADIOCFG_MAIN;
     } else if (StrEqual(szName, "Stations")) {
         g_iCurrentCfgState = RADIOCFG_STATIONS;
     } else {
@@ -55,11 +59,11 @@ public SMCResult CFG_OnSectionLeave(SMCParser hSMC) {
 }
 
 public SMCResult CFG_OnKeyValue(SMCParser hSMC, const char[] szKey, const char[] szValue, bool bKeyQuotes, bool bValueQuotes) {
-	if (g_iCurrentCfgState == RADIOCFG_MAIN) {
+    if (g_iCurrentCfgState == RADIOCFG_MAIN) {
         if (StrEqual(szKey, "Script")) {
             strcopy(g_szWebScript, sizeof(g_szWebScript), szValue);
         } else if (StrEqual(szKey, "StepVolume")) {
-        	g_iStepSize = StringToInt(szValue);
+            g_iStepSize = StringToInt(szValue);
         }
     } else if (g_iCurrentCfgState == RADIOCFG_STATIONS) {
         g_hRadioStations.SetString(szKey, szValue, true);
