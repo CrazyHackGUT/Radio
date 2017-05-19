@@ -1,34 +1,27 @@
-bool MusicManager_GetClientStationName(int iClient, char[] szOutput, int iMaxLength) {
-    if (g_iSelected[iClient] < 0) {
-        FormatEx(szOutput, iMaxLength, "%T", "StationNone", iClient);
+bool MusicManager_GetStationByID(int iID, char[] szURL = "", int iMaxURLLength = 0, char[] szName = "", int iMaxNameLength = 0, int iClient = -1) {
+    if (iID < 0) {
+        szURL[0] = 0;
+        szName[0] = 0;
+
+        if (iClient > 0) {
+            FormatEx(szName, iMaxNameLength, "%T", "StationNone", iClient);
+        }
         return true;
     }
 
-    StringMapSnapshot hSnapshot = g_hRadioStations.Snapshot();
-    if (hSnapshot.Length <= g_iSelected[iClient]) {
-        delete hSnapshot;
+    if (iID >= g_hRadioStations.Length) {
         return false;
     }
 
-    int iBytes = hSnapshot.GetKey(g_iSelected[iClient], szOutput, iMaxLength);
-    delete hSnapshot;
-
-    return (iBytes > 0);
-}
-
-bool MusicManager_GetClientStationURL(int iClient, char[] szOutput, int iMaxLength) {
-    if (!MusicManager_GetClientStationName(iClient, szOutput, iMaxLength))
-        return false;
-
-    return g_hRadioStations.GetString(szOutput, szOutput, iMaxLength);
+    DataPack hPack = g_hRadioStations.Get(iID);
+    hPack.Reset();
+    hPack.ReadString(szURL, iMaxURLLength);
+    hPack.ReadString(szName, iMaxNameLength);
+    return true;
 }
 
 bool MusicManager_ChangeStationMem(int iClient, int iID) {
-    StringMapSnapshot hSnapshot = g_hRadioStations.Snapshot();
-    int iLength = hSnapshot.Length;
-    delete hSnapshot;
-
-    if (iID >= iLength) {
+    if (iID >= g_hRadioStations.Length) {
         return false;
     }
 
@@ -42,7 +35,7 @@ bool MusicManager_ChangeStation(int iClient, int iID) {
 
     char szBuffer[256];
 
-    MusicManager_GetClientStationURL(iClient, szBuffer, sizeof(szBuffer));
+    MusicManager_GetStationByID(g_iSelected[iClient], szBuffer, sizeof(szBuffer));
     Format(szBuffer, sizeof(szBuffer), "%s#ChangeStation=%s", g_szWebScript, szBuffer);
 
     UTIL_SendLink(iClient, NULL_STRING, szBuffer, false);

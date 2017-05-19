@@ -16,7 +16,7 @@ int         g_iVolume[PLYCOUNT] = { 100, ... };
  * Config Values
  */
 char        g_szWebScript[256];
-StringMap   g_hRadioStations;
+ArrayList   g_hRadioStations;
 int         g_iDefaultVolume;
 int         g_iStepSize;
 
@@ -51,7 +51,7 @@ public Action NowPlaying(Handle hTimer) {
 
     for (int iPlayer = 1; iPlayer <= MaxClients; iPlayer++) {
         if (IsClientInGame(iPlayer) && !IsFakeClient(iPlayer) && IsClientAuthorized(iPlayer) && !g_bSilence[iPlayer]) {
-            if (g_iSelected[iPlayer] >= 0 && MusicManager_GetClientStationName(iPlayer, szBuffer, sizeof(szBuffer)))
+            if (g_iSelected[iPlayer] >= 0 && MusicManager_GetStationByID(g_iSelected[iPlayer], szBuffer, sizeof(szBuffer)))
                 PrintToChat(iPlayer, "[Radio] %t", "NowPlaying", szBuffer, g_iVolume[iPlayer]);
             else
                 PrintToChat(iPlayer, "[Radio] %t", "UseRadioCommand");

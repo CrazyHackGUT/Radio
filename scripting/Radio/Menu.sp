@@ -10,7 +10,7 @@ void Menu_Draw_MM(int iClient) {
     hMenu.AddItem("v", szBuffer, (g_iSelected[iClient] < 0 || g_bSilence[iClient]) ? ITEMDRAW_DISABLED : ITEMDRAW_DEFAULT);
 
     // Stations
-    MusicManager_GetClientStationName(iClient, szBuffer, sizeof(szBuffer));
+    MusicManager_GetStationByID(g_iSelected[iClient], _, _, szBuffer, sizeof(szBuffer));
     Format(szBuffer, sizeof(szBuffer), "%T", "MM_Station", iClient, szBuffer);
     hMenu.AddItem("s", szBuffer);
 
@@ -46,7 +46,7 @@ void Menu_Draw_SM(int iClient) {
     char szBuffer[256];
     Menu hMenu = new Menu(SMHandler);
 
-    MusicManager_GetClientStationName(iClient, szBuffer, sizeof(szBuffer));
+    MusicManager_GetStationByID(g_iSelected[iClient], _, _, szBuffer, sizeof(szBuffer), iClient);
     hMenu.SetTitle("%T", "SM_Title", iClient, szBuffer);
     hMenu.ExitBackButton = true;
     hMenu.ExitButton = false;
@@ -56,19 +56,17 @@ void Menu_Draw_SM(int iClient) {
         Format(szBuffer, sizeof(szBuffer), "%s %T", szBuffer, "SM_Current", iClient);
     hMenu.AddItem(NULL_STRING, szBuffer, ((g_iSelected[iClient] < 0) ? ITEMDRAW_DISABLED : ITEMDRAW_DEFAULT));
 
-    StringMapSnapshot hSnapShot = g_hRadioStations.Snapshot();
     int iID     = -1;
-    int iLength = hSnapShot.Length;
+    int iLength = g_hRadioStations.Length;
 
     while (++iID < iLength) {
-        hSnapShot.GetKey(iID, szBuffer, sizeof(szBuffer));
+        MusicManager_GetStationByID(iID, szBuffer, sizeof(szBuffer));
         if (iID == g_iSelected[iClient])
             Format(szBuffer, sizeof(szBuffer), "%s %T", szBuffer, "SM_Current", iClient);
 
         hMenu.AddItem(NULL_STRING, szBuffer, ((g_iSelected[iClient] == iID) ? ITEMDRAW_DISABLED : ITEMDRAW_DEFAULT));
     }
 
-    delete hSnapShot;
     hMenu.Display(iClient, 0);
 }
 

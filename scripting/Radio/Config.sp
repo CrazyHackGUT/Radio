@@ -17,9 +17,12 @@ void ReadConfig() {
 
 void ClearStations() {
     if (g_hRadioStations) {
+        for (int i = 0; i<g_hRadioStations.Length; i++)
+            delete view_as<DataPack>(g_hRadioStations.Get(i));
+
         g_hRadioStations.Clear();
     } else {
-        g_hRadioStations = new StringMap();
+        g_hRadioStations = new ArrayList(ByteCountToCells(8));
     }
 }
 
@@ -72,6 +75,9 @@ public SMCResult CFG_OnKeyValue(SMCParser hSMC, const char[] szKey, const char[]
                 g_iDefaultVolume = 0;
         }
     } else if (g_iCurrentCfgState == RADIOCFG_STATIONS) {
-        g_hRadioStations.SetString(szKey, szValue, true);
+        DataPack hPack = new DataPack();
+        hPack.WriteString(szKey);
+        hPack.WriteString(szValue);
+        g_hRadioStations.Push(hPack);
     }
 }
