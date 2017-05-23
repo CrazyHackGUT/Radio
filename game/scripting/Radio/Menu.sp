@@ -60,7 +60,7 @@ void Menu_Draw_SM(int iClient) {
     int iLength = g_hRadioStations.Length;
 
     while (++iID < iLength) {
-        MusicManager_GetStationByID(iID, szBuffer, sizeof(szBuffer));
+        MusicManager_GetStationByID(iID, _, _, szBuffer, sizeof(szBuffer));
         if (iID == g_iSelected[iClient])
             Format(szBuffer, sizeof(szBuffer), "%s %T", szBuffer, "SM_Current", iClient);
 
@@ -127,7 +127,6 @@ public int SMHandler(Menu hMenu, MenuAction iAction, int iParam1, int iParam2) {
             MusicManager_ChangeStation(iParam1, iParam2 - 1);
         else
             MusicManager_ChangeStationMem(iParam1, iParam2 - 1);
-        CreateTimer(0.5, MusicManager_SendVolume, iParam1);
         Menu_Draw_MM(iParam1);
     }
 }

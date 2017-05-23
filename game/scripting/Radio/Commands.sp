@@ -1,6 +1,10 @@
 void RegisterCommands() {
     RegConsoleCmd("sm_radio",       Cmd_Radio);
+
     RegConsoleCmd("sm_radio_off",   Cmd_RadioOff);
+    RegConsoleCmd("sm_radiooff",    Cmd_RadioOff);
+
+    // RegConsoleCmd("sm_volume",      Cmd_Volume);
 }
 
 public Action Cmd_Radio(int iClient, int iArgs) {

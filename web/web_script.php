@@ -15,8 +15,13 @@ $volume = floatval($volume);
  * Select content type.
  */
 if ($_GET['engine'] == "old") {
-?><!-- Counter-Strike: Source v34 --><?php
-} else {
+?><!-- Counter-Strike: Source v34 -->
+<object type="application/x-shockwave-flash" data="player.swf" width="1" height="1">
+    <param name="movie" value="player.swf" />
+    <param name="AllowScriptAccess" value="always" />
+    <param name="FlashVars" value="mp3=<?= $station; ?>&autoplay=1&volume=<?= intval($volume * 100); ?>" />
+</object>
+<?php } else {
 ?><!-- Orange Box / CSGO -->
 <audio id="hPlayer" autoplay></audio>
 

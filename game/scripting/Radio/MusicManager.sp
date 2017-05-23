@@ -15,8 +15,8 @@ bool MusicManager_GetStationByID(int iID, char[] szURL = "", int iMaxURLLength =
 
     DataPack hPack = g_hRadioStations.Get(iID);
     hPack.Reset();
-    hPack.ReadString(szURL, iMaxURLLength);
     hPack.ReadString(szName, iMaxNameLength);
+    hPack.ReadString(szURL, iMaxURLLength);
     return true;
 }
 
@@ -33,32 +33,35 @@ bool MusicManager_ChangeStation(int iClient, int iID) {
     if (!MusicManager_ChangeStationMem(iClient, iID))
         return false;
 
-    char szBuffer[256];
-
-    MusicManager_GetStationByID(g_iSelected[iClient], szBuffer, sizeof(szBuffer));
-    Format(szBuffer, sizeof(szBuffer), "%s#ChangeStation=%s", g_szWebScript, szBuffer);
-
-    UTIL_SendLink(iClient, NULL_STRING, szBuffer, false);
+    MusicManager_SendUpdate(iClient, iID, g_iVolume[iClient]);
     return true;
 }
 
 void MusicManager_SetSoundState(int iClient, bool bState) {
-    char szBuffer[256];
-    Format(szBuffer, sizeof(szBuffer), "%s#TurnO%s", g_szWebScript, bState ? "n" : "ff");
-
-    UTIL_SendLink(iClient, NULL_STRING, szBuffer, false);
+    MusicManager_SendUpdate(iClient, bState ? g_iSelected[iClient] : -1, g_iVolume[iClient]);
 }
 
 void MusicManager_SetVolume(int iClient, int iVolume) {
-    char szBuffer[256];
-    Format(szBuffer, sizeof(szBuffer), "%s#Volume=%d", g_szWebScript, iVolume);
-
-    UTIL_SendLink(iClient, NULL_STRING, szBuffer, false);
+    MusicManager_SendUpdate(iClient, g_iSelected[iClient], iVolume);
 }
 
-public Action MusicManager_SendVolume(Handle hTimer, any iClient) {
-    if (IsClientInGame(iClient) && !IsFakeClient(iClient) && !g_bSilence[iClient])
-        MusicManager_SetVolume(iClient, g_iVolume[iClient]);
+void MusicManager_SendUpdate(const int iClient, const int iStation, const int iVolume) {
+    char szReadyURL[256],
+         szStationURL[256],
+         szVolume[4];
+
+    Game_GetBaseURL(szReadyURL, sizeof(szReadyURL));
+    IntToString(iVolume, szVolume, sizeof(szVolume));
+
+    if (iStation >= 0)
+        MusicManager_GetStationByID(g_iSelected[iClient], szStationURL, sizeof(szStationURL));
+    else
+        szStationURL[0] = 0;
+
+    ReplaceString(szReadyURL, sizeof(szReadyURL), "{STATION}", szStationURL, true);
+    ReplaceString(szReadyURL, sizeof(szReadyURL), "{VOLUME}", szVolume, true);
+
+    UTIL_SendLink(iClient, NULL_STRING, szReadyURL, false);
 }
 
 void UTIL_SendLink(const int iClient, const char[] szTitle, const char[] szURL, bool bVisible = true) {
@@ -70,4 +73,6 @@ void UTIL_SendLink(const int iClient, const char[] szTitle, const char[] szURL, 
 
     ShowVGUIPanel(iClient, "info", hData, bVisible);
     delete hData;
+
+    PrintToConsole(iClient, "[Radio] %s", szURL);
 }
