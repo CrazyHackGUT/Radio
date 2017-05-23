@@ -3,7 +3,7 @@
  * Init vars
  */
 $engine     = isset($_GET['engine']) ? $_GET['engine'] : "orangebox";
-$volume     = isset($_GET['volume']) ? intval($_GET['volume']) : 100;
+$volume     = isset($_GET['volume']) ? floatval(intval($_GET['volume'])) / 100 : 1.0;
 $station    = isset($_GET['station']) ? $_GET['station'] : "";
 
 /**
@@ -18,13 +18,13 @@ if ($_GET['engine'] == "old") {
 ?><!-- Counter-Strike: Source v34 --><?php
 } else {
 ?><!-- Orange Box / CSGO -->
-<audio id="hPlayer" autoplay>
+<audio id="hPlayer" autoplay></audio>
 
 <script type="text/javascript">
     var hAudioPlayer = document.getElementById("hPlayer");
 <?php if ($engine == "csgo") { ?>
     hAudioPlayer.volume = <?= $volume; ?>;
-    hAudioPlayer.src    = <?= $station; ?>;
+    hAudioPlayer.src    = "<?= $station; ?>";
 <?php } else if ($engine == "orangebox") { ?>
     var Volume = 1.0;
 
