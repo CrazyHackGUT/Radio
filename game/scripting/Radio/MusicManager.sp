@@ -1,9 +1,9 @@
-bool MusicManager_GetStationByID(int iID, char[] szURL = "", int iMaxURLLength = 0, char[] szName = "", int iMaxNameLength = 0, int iClient = -1) {
+bool MusicManager_GetStationByID(int iID, char[] szURL = "", int iMaxURLLength = 0, char[] szName = "", int iMaxNameLength = 0, int iClient = 0) {
     if (iID < 0) {
         szURL[0] = 0;
         szName[0] = 0;
 
-        if (iClient > 0) {
+        if (iClient >= 0) {
             FormatEx(szName, iMaxNameLength, "%T", "StationNone", iClient);
         }
         return true;
@@ -73,6 +73,4 @@ void UTIL_SendLink(const int iClient, const char[] szTitle, const char[] szURL, 
 
     ShowVGUIPanel(iClient, "info", hData, bVisible);
     delete hData;
-
-    PrintToConsole(iClient, "[Radio] %s", szURL);
 }

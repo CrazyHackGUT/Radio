@@ -1,4 +1,10 @@
 void Menu_Draw_MM(int iClient) {
+    if (MOTD_GetState(iClient) != Enabled) {
+        PrintToChat(iClient, "[Radio] %t", "EnableMOTD");
+        Menu_Draw_MOTDInstruction(iClient);
+        return;
+    }
+
     char szBuffer[256];
     Menu hMenu = new Menu(MMHandler);
 
@@ -10,7 +16,7 @@ void Menu_Draw_MM(int iClient) {
     hMenu.AddItem("v", szBuffer, (g_iSelected[iClient] < 0 || g_bSilence[iClient]) ? ITEMDRAW_DISABLED : ITEMDRAW_DEFAULT);
 
     // Stations
-    MusicManager_GetStationByID(g_iSelected[iClient], _, _, szBuffer, sizeof(szBuffer));
+    MusicManager_GetStationByID(g_iSelected[iClient], _, _, szBuffer, sizeof(szBuffer), iClient);
     Format(szBuffer, sizeof(szBuffer), "%T", "MM_Station", iClient, szBuffer);
     hMenu.AddItem("s", szBuffer);
 
@@ -24,6 +30,12 @@ void Menu_Draw_MM(int iClient) {
 }
 
 void Menu_Draw_VM(int iClient) {
+    if (MOTD_GetState(iClient) != Enabled) {
+        PrintToChat(iClient, "[Radio] %t", "EnableMOTD");
+        Menu_Draw_MOTDInstruction(iClient);
+        return;
+    }
+
     char szBuffer[256];
     Menu hMenu = new Menu(VMHandler);
 
@@ -43,6 +55,12 @@ void Menu_Draw_VM(int iClient) {
 }
 
 void Menu_Draw_SM(int iClient) {
+    if (MOTD_GetState(iClient) != Enabled) {
+        PrintToChat(iClient, "[Radio] %t", "EnableMOTD");
+        Menu_Draw_MOTDInstruction(iClient);
+        return;
+    }
+
     char szBuffer[256];
     Menu hMenu = new Menu(SMHandler);
 
@@ -68,6 +86,26 @@ void Menu_Draw_SM(int iClient) {
     }
 
     hMenu.Display(iClient, 0);
+}
+
+void Menu_Draw_MOTDInstruction(int iClient) {
+    Panel hPanel = new Panel();
+
+    char szBuffer[128];
+    FormatEx(szBuffer, sizeof(szBuffer), "%T\n ", "MOTD_Title", iClient);
+    hPanel.SetTitle(szBuffer);
+
+    for (int iStep = 1; iStep < 5; iStep++) {
+        FormatEx(szBuffer, sizeof(szBuffer), "MOTD_Step%d", iStep);
+        Format(szBuffer, sizeof(szBuffer), "%d. %T", iStep, szBuffer, iClient);
+        hPanel.DrawText(szBuffer);
+    }
+
+    FormatEx(szBuffer, sizeof(szBuffer), "%T", "MOTD_Exit", iClient);
+    hPanel.DrawItem(szBuffer);
+
+    hPanel.Send(iClient, PanelHandler, 120);
+    delete hPanel;
 }
 
 public int MMHandler(Menu hMenu, MenuAction iAction, int iParam1, int iParam2) {
@@ -128,5 +166,11 @@ public int SMHandler(Menu hMenu, MenuAction iAction, int iParam1, int iParam2) {
         else
             MusicManager_ChangeStationMem(iParam1, iParam2 - 1);
         Menu_Draw_MM(iParam1);
+    }
+}
+
+public int PanelHandler(Menu hMenu, MenuAction iAction, int iParam1, int iParam2) {
+    if (iAction == MenuAction_Select) {
+        MOTD_Check(iParam1);
     }
 }

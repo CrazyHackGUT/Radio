@@ -99,4 +99,47 @@
         "en"        "This server have radio plugin. Type !radio to chat!"
         "ru"        "На этом сервере есть Радио плагин. Введите !radio в чат!"
     }
+
+    "EnableMOTD"
+    {
+        "en"        "Please, enable HTML MOTD on client!"
+        "ru"        "Пожалуйста, включите HTML MOTD у себя в клиенте!"
+    }
+
+    // MOTD Instructions
+    "MOTD_Title"
+    {
+        "en"        "How to enable HTML MOTD?"
+        "ru"        "Как включить HTML MOTD?"
+    }
+
+    "MOTD_Step1"
+    {
+        "en"        "Enable developer console in Settings -> Keyboard -> Advanced"
+        "ru"        "Включите консоль разработчика в Настройки -> Клавиатура -> Дополнительно"
+    }
+
+    "MOTD_Step2"
+    {
+        "en"        "Open developer console using tilda (~) button"
+        "ru"        "Откройте консоль разработчика используя кнопку Тильда (~)"
+    }
+
+    "MOTD_Step3"
+    {
+        "en"        "Type in console cl_disablehtmlmotd 0"
+        "ru"        "Введите в консоли cl_disablehtmlmotd 0"
+    }
+
+    "MOTD_Step4"
+    {
+        "en"        "Press button Enter"
+        "ru"        "Нажмите кнопку Enter"
+    }
+
+    "MOTD_Exit"
+    {
+        "en"        "Close"
+        "ru"        "Закрыть"
+    }
 }
