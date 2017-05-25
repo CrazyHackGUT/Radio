@@ -5,7 +5,7 @@
 #define RADIO_TIMER TIMER_REPEAT | TIMER_FLAG_NO_MAPCHANGE
 #define PLYCOUNT    MAXPLAYERS + 1
 
-public Plugin myinfo = { url = "https://kruzefag.ru/", name = "Radio", author = "CrazyHackGUT aka Kruzya", version = "1.3", description = "Radio plugin for all Source games"};
+public Plugin myinfo = { url = "https://kruzefag.ru/", name = "Radio", author = "CrazyHackGUT aka Kruzya", version = "1.3.1 RC1", description = "Radio plugin for all Source games"};
 
 /**
  * Global settings for all players
@@ -17,11 +17,14 @@ int         g_iVolume[PLYCOUNT];
 /**
  * Config Values
  */
-char        g_szWebScript[256];
-ArrayList   g_hRadioStations;
-int         g_iDefaultVolume;
-bool        g_bFirstStart;
-int         g_iStepSize;
+char        g_szWebScript[256]; // web-script url
+ArrayList   g_hRadioStations;   // array with datapacks with stations
+int         g_iDefaultVolume;   // default volume for all clients
+float       g_fMOTDChecker;     // Periodic time for MOTD checker
+float       g_fAdvertTime;      // Advert periodic time
+bool        g_bFirstStart;      // scratch var.
+int         g_iStepSize;        // step size in Volume menu.
+                                // HERE
 
 #include "Radio/MusicManager.sp"
 #include "Radio/DisableMOTD.sp"
@@ -53,8 +56,10 @@ public void OnMapStart() {
         g_bFirstStart = false;
     }
 
-    CreateTimer(180.0, NowPlaying, _, RADIO_TIMER);
-    CreateTimer(30.0,  QueryMOTD,  _, RADIO_TIMER);
+    if (g_fAdvertTime >= 1.0)
+        CreateTimer(g_fAdvertTime, NowPlaying, _, RADIO_TIMER);
+    if (g_fMOTDChecker >= 1.0)
+        CreateTimer(g_fMOTDChecker,  QueryMOTD,  _, RADIO_TIMER);
 }
 
 public void OnPlayerConnect(Event hEvent, const char[] szEventName, bool bDontBroadcast) {

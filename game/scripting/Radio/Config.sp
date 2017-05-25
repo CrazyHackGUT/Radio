@@ -54,11 +54,11 @@ public SMCResult CFG_OnSectionEnter(SMCParser hSMC, const char[] szName, bool bO
 }
 
 public SMCResult CFG_OnSectionLeave(SMCParser hSMC) {
-	if (g_iCurrentCfgState == RADIOCFG_MAIN) {
-	   g_iCurrentCfgState = RADIOCFG_NONE;
-	} else if (g_iCurrentCfgState == RADIOCFG_STATIONS) {
-	   g_iCurrentCfgState = RADIOCFG_MAIN;
-	}
+    if (g_iCurrentCfgState == RADIOCFG_MAIN) {
+        g_iCurrentCfgState = RADIOCFG_NONE;
+    } else if (g_iCurrentCfgState == RADIOCFG_STATIONS) {
+        g_iCurrentCfgState = RADIOCFG_MAIN;
+    }
 }
 
 public SMCResult CFG_OnKeyValue(SMCParser hSMC, const char[] szKey, const char[] szValue, bool bKeyQuotes, bool bValueQuotes) {
@@ -73,6 +73,10 @@ public SMCResult CFG_OnKeyValue(SMCParser hSMC, const char[] szKey, const char[]
                 g_iDefaultVolume = 100;
             else if (g_iDefaultVolume < 0)
                 g_iDefaultVolume = 0;
+        } else if (StrEqual(szKey, "Advert_Time") {
+            g_fAdvertTime = StringToFloat(szValue);
+        } else if (StrEqual(szKey, "MOTD_Time") {
+            g_fMOTDChecker = StringToFloat(szValue);
         }
     } else if (g_iCurrentCfgState == RADIOCFG_STATIONS) {
         DataPack hPack = new DataPack();
