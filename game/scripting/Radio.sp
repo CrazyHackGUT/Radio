@@ -5,7 +5,7 @@
 #define RADIO_TIMER TIMER_REPEAT | TIMER_FLAG_NO_MAPCHANGE
 #define PLYCOUNT    MAXPLAYERS + 1
 
-public Plugin myinfo = { url = "https://kruzefag.ru/", name = "Radio", author = "CrazyHackGUT aka Kruzya", version = "1.3.1 RC2", description = "Radio plugin for all Source games"};
+public Plugin myinfo = { url = "https://kruzefag.ru/", name = "Radio", author = "CrazyHackGUT aka Kruzya", version = "1.3.1 RC3", description = "Radio plugin for all Source games"};
 
 /**
  * Global settings for all players
