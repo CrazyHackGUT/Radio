@@ -5,7 +5,7 @@
 #define RADIO_TIMER TIMER_REPEAT | TIMER_FLAG_NO_MAPCHANGE
 #define PLYCOUNT    MAXPLAYERS + 1
 
-public Plugin myinfo = { url = "https://kruzefag.ru/", name = "Radio", author = "CrazyHackGUT aka Kruzya", version = "1.3.1 RC1", description = "Radio plugin for all Source games"};
+public Plugin myinfo = { url = "https://kruzefag.ru/", name = "Radio", author = "CrazyHackGUT aka Kruzya", version = "1.3.1 RC2", description = "Radio plugin for all Source games"};
 
 /**
  * Global settings for all players
@@ -30,6 +30,7 @@ int         g_iStepSize;        // step size in Volume menu.
 #include "Radio/DisableMOTD.sp"
 #include "Radio/Commands.sp"
 #include "Radio/Config.sp"
+#include "Radio/Events.sp"
 #include "Radio/Game.sp"
 #include "Radio/Menu.sp"
 
@@ -37,11 +38,7 @@ public void OnPluginStart() {
     LoadTranslations("Radio.phrases");
     Game_DetectEngine();
     RegisterCommands();
-
-    if (!HookEventEx("player_connect", OnPlayerConnect, EventHookMode_Post) && !HookEventEx("player_connect_client", OnPlayerConnect, EventHookMode_Post)) {
-        SetFailState("[Radio] Couldn't hook PlayerConnect event. Unsupported game. Report this incident to developer: https://steamcommunity.com/profiles/76561198071596952/");
-        return;
-    }
+    Events_Hook();
 
     g_bFirstStart = true;
 }
@@ -60,10 +57,6 @@ public void OnMapStart() {
         CreateTimer(g_fAdvertTime, NowPlaying, _, RADIO_TIMER);
     if (g_fMOTDChecker >= 1.0)
         CreateTimer(g_fMOTDChecker,  QueryMOTD,  _, RADIO_TIMER);
-}
-
-public void OnPlayerConnect(Event hEvent, const char[] szEventName, bool bDontBroadcast) {
-    ClearSettings(hEvent.GetInt("index"));
 }
 
 void ClearSettings(int iClient) {

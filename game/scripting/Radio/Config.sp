@@ -73,9 +73,9 @@ public SMCResult CFG_OnKeyValue(SMCParser hSMC, const char[] szKey, const char[]
                 g_iDefaultVolume = 100;
             else if (g_iDefaultVolume < 0)
                 g_iDefaultVolume = 0;
-        } else if (StrEqual(szKey, "Advert_Time") {
+        } else if (StrEqual(szKey, "Advert_Time")) {
             g_fAdvertTime = StringToFloat(szValue);
-        } else if (StrEqual(szKey, "MOTD_Time") {
+        } else if (StrEqual(szKey, "MOTD_Time")) {
             g_fMOTDChecker = StringToFloat(szValue);
         }
     } else if (g_iCurrentCfgState == RADIOCFG_STATIONS) {
