@@ -1,8 +1,3 @@
-#define GAME_UNKNOWN    0
-#define GAME_ORANGEBOX  1
-#define GAME_CSGO       2
-#define GAME_OLD        3
-
 int g_iEngine;
 
 void Game_DetectEngine() {
