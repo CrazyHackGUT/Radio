@@ -42,3 +42,7 @@ bool Game_Generic_GetBaseURL(char[] szOutput, int iMaxLength) {
     FormatEx(szOutput, iMaxLength, "%s?engine=orangebox#Station={STATION}&Volume={VOLUME}", g_szWebScript);
     return true;
 }
+
+int Game_GetEngine() {
+    return g_iEngine;
+}

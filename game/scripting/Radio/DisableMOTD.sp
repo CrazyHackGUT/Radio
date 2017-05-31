@@ -9,6 +9,12 @@ enum CV_State {
 CV_State g_eMOTDState[PLYCOUNT] = { Unknown, ... };
 
 void MOTD_Check(int iClient) {
+    if (Game_GetEngine() == GAME_OLD) {
+        // CSS v34 don't have client variable cl_disablehtmlmotd. Thanks, @will_rock and @Meowmurmur.
+        MOTD_SetState(iClient, Enabled);
+        return;
+    }
+
     if (QueryClientConVar(iClient, "cl_disablehtmlmotd", MOTD_OnQueryFinished) != QUERYCOOKIE_FAILED) {
         MOTD_SetState(iClient, Processing);
     } else {

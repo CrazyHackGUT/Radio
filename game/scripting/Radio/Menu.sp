@@ -91,7 +91,7 @@ void Menu_Draw_SM(int iClient) {
 void Menu_Draw_MOTDInstruction(int iClient) {
     Panel hPanel = new Panel();
 
-    char szBuffer[128];
+    char szBuffer[172];
     FormatEx(szBuffer, sizeof(szBuffer), "%T\n ", "MOTD_Title", iClient);
     hPanel.SetTitle(szBuffer);
 
