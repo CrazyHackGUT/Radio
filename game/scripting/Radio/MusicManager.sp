@@ -63,14 +63,3 @@ void MusicManager_SendUpdate(const int iClient, const int iStation, const int iV
 
     UTIL_SendLink(iClient, NULL_STRING, szReadyURL, false);
 }
-
-void UTIL_SendLink(const int iClient, const char[] szTitle, const char[] szURL, bool bVisible = true) {
-    KeyValues hData = new KeyValues("data");
-
-    hData.SetNum("type", MOTDPANEL_TYPE_URL);
-    hData.SetString("title", szTitle);
-    hData.SetString("msg", szURL);
-
-    ShowVGUIPanel(iClient, "info", hData, bVisible);
-    delete hData;
-}
