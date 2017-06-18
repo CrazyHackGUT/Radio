@@ -32,7 +32,7 @@ public void MOTD_OnQueryFinished(QueryCookie hCookie, int iClient, ConVarQueryRe
 }
 
 CV_State MOTD_GetState(int iClient) {
-    return g_eMOTDState[iClient];
+    return (Game_GetEngine() != GAME_OLD) ? g_eMOTDState[iClient] : Enabled;
 }
 
 void MOTD_SetState(int iClient, CV_State eNewState) {
