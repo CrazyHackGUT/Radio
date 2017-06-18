@@ -9,7 +9,11 @@ void Game_DetectEngine() {
     }
 
     if (g_iEngine == GAME_UNKNOWN) {
-        LogError("[Engine Detect] Unknown game. Radio plugin maybe can't work. Report this information to author: https://steamcommunity.com/profiles/76561198071596952/");
+        LogError("[Engine Detect] Unknown game. Radio plugin maybe can't work. Report this information to author: https://crazyhackgut.ru/");
+    }
+
+    if (g_iEngine == GAME_CSGO) {
+        SetFailState("[Engine Detect] Sorry, but Valve fucked CS:GO compatibility. Please, wait a fix. Thanks!");
     }
 }
 

@@ -10,7 +10,9 @@
 #define GAME_CSGO       2
 #define GAME_OLD        3
 
-public Plugin myinfo = { url = "https://kruzefag.ru/", name = "Radio", author = "CrazyHackGUT aka Kruzya", version = "1.3.1 RC6", description = "Radio plugin for all Source games"};
+#define SZF(%0)         %0, sizeof(%0)
+
+public Plugin myinfo = { url = "https://kruzefag.ru/", name = "Radio", author = "CrazyHackGUT aka Kruzya", version = "1.3.1 RC9", description = "Radio plugin for all Source games"};
 
 /**
  * Global settings for all players
