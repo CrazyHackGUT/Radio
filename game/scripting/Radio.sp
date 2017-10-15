@@ -1,4 +1,5 @@
 #include <sourcemod>
+#include <colors>
 
 #pragma newdecls required
 
