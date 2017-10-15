@@ -12,6 +12,8 @@ void UTIL_SendLink(const int iClient, const char[] szTitle, const char[] szURL, 
     hData.SetString("title", szTitle);
     hData.SetString("msg", szURL);
 
+    // PrintToConsole(iClient, "UTIL_SendLink(): %s", szURL);
+
     ShowVGUIPanel(iClient, "info", hData, bVisible);
     delete hData;
 }

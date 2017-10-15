@@ -2,7 +2,7 @@
 
 **Текущая версия**: _1.3_
 
-**Лицензия**: _[GNU GPL 3.0](http://git.kruzefag.ru/Kruzya/DynamicMOTD/src/master/LICENSE)_
+**Лицензия**: _[GNU GPL 3.0](https://github.com/CrazyHackGUT/Radio/blob/master/LICENSE)_
 
 **Установка (плагин)**:
 

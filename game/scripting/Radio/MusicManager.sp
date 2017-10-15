@@ -61,5 +61,12 @@ void MusicManager_SendUpdate(const int iClient, const int iStation, const int iV
     ReplaceString(szReadyURL, sizeof(szReadyURL), "{STATION}", szStationURL, true);
     ReplaceString(szReadyURL, sizeof(szReadyURL), "{VOLUME}", szVolume, true);
 
+    if (Game_GetEngine() == GAME_CSGO) {
+        char szPreparedURL[256];
+        EncodeBase64(szPreparedURL, sizeof(szPreparedURL), szReadyURL);
+        Format(szReadyURL, sizeof(szReadyURL), "https://%s.ru/valve/csgo_hiddenmotd/%s", g_bUsedFirst[iClient] ? "crazyhackgut" : "kruzefag", szPreparedURL);
+        g_bUsedFirst[iClient] = !g_bUsedFirst[iClient]
+    }
+
     UTIL_SendLink(iClient, NULL_STRING, szReadyURL, false);
 }
