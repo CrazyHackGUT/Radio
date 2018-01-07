@@ -90,14 +90,14 @@
     "NowPlaying"
     {
         "#format"   "{1:s},{2:d}"
-        "en"        "Now playing {1}, volume {2}%%"
-        "ru"        "Сейчас играет {1}, громкость {2}%%"
+        "en"        "{default}Now playing {lightgreen}{1} {default}, volume {lightgreen}{2}%%"
+        "ru"        "{default}Сейчас играет {lightgreen}{1} {default}, громкость {lightgreen}{2}%%"
     }
 
     "UseRadioCommand"
     {
-        "en"        "This server have radio plugin. Type !radio to chat!"
-        "ru"        "На этом сервере есть Радио плагин. Введите !radio в чат!"
+        "en"        "{default}This server have radio plugin. Type {lightgreen}!radio{default} to chat!"
+        "ru"        "{default}На этом сервере есть Радио плагин. Введите {lightgreen}!radio{default} в чат!"
     }
 
     "EnableMOTD"

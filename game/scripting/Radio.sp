@@ -1,5 +1,6 @@
 #include <sourcemod>
 #include <base64>
+#include <colors>
 
 #pragma newdecls required
 

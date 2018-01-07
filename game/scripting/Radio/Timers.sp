@@ -4,9 +4,9 @@ public Action NowPlaying(Handle hTimer) {
     for (int iPlayer = 1; iPlayer <= MaxClients; iPlayer++) {
         if (IsClientInGame(iPlayer) && !IsFakeClient(iPlayer) && !g_bSilence[iPlayer]) {
             if (g_iSelected[iPlayer] >= 0 && MusicManager_GetStationByID(g_iSelected[iPlayer], _, _, szBuffer, sizeof(szBuffer)))
-                PrintToChat(iPlayer, "[Radio] %t", "NowPlaying", szBuffer, g_iVolume[iPlayer]);
+                PrintToChat(iPlayer, "\x04[Radio]\x01 %t", "NowPlaying", szBuffer, g_iVolume[iPlayer]);
             else
-                PrintToChat(iPlayer, "[Radio] %t", "UseRadioCommand");
+                PrintToChat(iPlayer, "\x04[Radio]\x01 %t", "UseRadioCommand");
         }
     }
 }
