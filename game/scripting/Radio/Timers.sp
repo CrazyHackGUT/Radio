@@ -1,3 +1,27 @@
+static Handle   g_hAdvertTimer;
+static Handle   g_hMotdTimer;
+
+void Timers_Restart() {
+    Timers_Stop();
+    Timers_Start();
+}
+
+void Timers_Start() {
+    if (g_fAdvertTime >= 1.0)
+        g_hAdvertTimer = CreateTimer(g_fAdvertTime, NowPlaying, _, RADIO_TIMER);
+    if (g_fMOTDChecker >= 1.0)
+        g_hMotdTimer = CreateTimer(g_fMOTDChecker,  QueryMOTD,  _, RADIO_TIMER);
+}
+
+void Timers_Stop() {
+    if (g_hAdvertTimer != null) {
+        KillTimer(g_hAdvertTimer);
+    }
+    if (g_hMotdTimer != null) {
+        KillTimer(g_hMotdTimer);
+    }
+}
+
 public Action NowPlaying(Handle hTimer) {
     char szBuffer[128];
 

@@ -1,6 +1,5 @@
 #include <sourcemod>
 #include <base64>
-#include <colors>
 
 #pragma newdecls required
 
@@ -14,7 +13,7 @@
 
 #define SZF(%0)         %0, sizeof(%0)
 
-public Plugin myinfo = { url = "https://kruzefag.ru/", name = "Radio", author = "CrazyHackGUT aka Kruzya", version = "1.3.1", description = "Radio plugin for all Source games"};
+public Plugin myinfo = { url = "https://kruzefag.ru/", name = "Radio", author = "CrazyHackGUT aka Kruzya", version = "1.3.2", description = "Radio plugin for all Source games"};
 
 /**
  * Global settings for all players
@@ -40,6 +39,7 @@ int         g_iStepSize;        // step size in Volume menu.
 #include "Radio/DisableMOTD.sp"
 #include "Radio/Commands.sp"
 #include "Radio/Config.sp"
+#include "Radio/ConVar.sp"
 #include "Radio/Events.sp"
 #include "Radio/Timers.sp"
 #include "Radio/Game.sp"

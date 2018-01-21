@@ -39,6 +39,7 @@ public void OnPluginStart() {
     Game_DetectEngine();
     RegisterCommands();
     Events_Hook();
+    ConVar_Init();
 
     g_bFirstStart = true;
 }
@@ -52,11 +53,6 @@ public void OnMapStart() {
             UTIL_ClearSettings(iClient);
         g_bFirstStart = false;
     }
-
-    if (g_fAdvertTime >= 1.0)
-        CreateTimer(g_fAdvertTime, NowPlaying, _, RADIO_TIMER);
-    if (g_fMOTDChecker >= 1.0)
-        CreateTimer(g_fMOTDChecker,  QueryMOTD,  _, RADIO_TIMER);
 }
 
 public void OnClientPutInServer(int iClient) {
