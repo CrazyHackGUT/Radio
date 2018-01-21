@@ -5,12 +5,14 @@
     {
         "en"        "Not selected"
         "ru"        "Не выбрана"
+        "ua"        "Не обрана"
     }
 
     "FeatureOff"
     {
         "en"        "This feature has been disabled by administrator."
         "ru"        "Данная функция была отключена администратором."
+        "ua"        "Дана функція була відключена адміністратором."
     }
 
     // Main menu
@@ -18,6 +20,7 @@
     {
         "en"        "-=[ Radio ]=-"
         "ru"        "-=[ Радио ]=-"
+        "ua"        "-=[ Радiо ]=-"
     }
 
     "MM_Volume"
@@ -25,6 +28,7 @@
         "#format"   "{1:d}"
         "en"        "Volume: {1}%%"
         "ru"        "Громкость: {1}%%"
+        "ua"        "Гучнiсть: {1}%%"
     }
 
     "MM_Station"
@@ -32,24 +36,28 @@
         "#format"   "{1:s}"
         "en"        "Current station: {1}"
         "ru"        "Смена станции: {1}"
+        "ua"        "Зміна станції: {1}"
     }
 
     "MM_TurnOffSound"
     {
         "en"        "Turn off the sound"
         "ru"        "Выключить звук"
+        "ua"        "Вимкнути звук"
     }
 
     "MM_TurnOnSound"
     {
         "en"        "Turn on the sound"
         "ru"        "Включить звук"
+        "ua"        "Включити звук"
     }
 
     "MM_Stop"
     {
         "en"        "Stop playing"
         "ru"        "Остановить воспроизведение"
+        "ua"        "Зупинити відтворення"
     }
 
     // Volume
@@ -58,18 +66,21 @@
         "#format"   "{1:d}"
         "en"        "-=[ Volume ({1}%%) ]=-"
         "ru"        "-=[ Громкость ({1}%%) ]=-"
+        "ua"        "-=[ Гучність ({1}%%) ]=-"
     }
 
     "VM_Increase"
     {
         "en"        "Increase current volume"
         "ru"        "Поднять уровень громкости"
+        "ua"        "Збільшити рівень гучності"
     }
 
     "VM_Decrease"
     {
         "en"        "Decrease current volume"
         "ru"        "Понизить уровень громкости"
+        "ua"        "Зменшити рівень гучності"
     }
 
     // Stations
@@ -78,12 +89,14 @@
         "#format"   "{1:s}"
         "en"        "-=[ Select Station (current: {1}) ]=-"
         "ru"        "-=[ Выбор станции (текущая: {1}) ]=-"
+        "ua"        "-=[ Вибір станції (поточна: {1}) ]=-"
     }
 
     "SM_Current"
     {
         "en"        "(current)"
         "ru"        "(текущая)"
+        "ua"        "(поточна)"
     }
 
     // Chat messages
@@ -91,6 +104,7 @@
     {
         "en"        "[Radio] "
         "ru"        "[Радио] "
+        "ua"        "[Радіо] "
     }
 
     "NowPlaying"
@@ -98,18 +112,21 @@
         "#format"   "{1:s},{2:d}"
         "en"        "{default}Now playing {lightgreen}{1} {default}, volume {lightgreen}{2}%%"
         "ru"        "{default}Сейчас играет {lightgreen}{1} {default}, громкость {lightgreen}{2}%%"
+        "ua"        "{default}Зараз грає {lightgreen}{1} {default}, гучність {lightgreen}{2}%%"
     }
 
     "UseRadioCommand"
     {
         "en"        "{default}This server have radio plugin. Type {lightgreen}!radio{default} to chat!"
         "ru"        "{default}На этом сервере есть Радио плагин. Введите {lightgreen}!radio{default} в чат!"
+        "ua"        "{default}На цьому сервері є Радіо плагін. Введіть {lightgreen}!radio{default} в чат!"
     }
 
     "EnableMOTD"
     {
         "en"        "Please, enable HTML MOTD on client!"
         "ru"        "Пожалуйста, включите HTML MOTD у себя в клиенте!"
+        "ua"        "Будь ласка, увімкніть HTML MOTD у себе в клієнті!"
     }
 
     // MOTD Instructions
@@ -117,35 +134,41 @@
     {
         "en"        "How to enable HTML MOTD?"
         "ru"        "Как включить HTML MOTD?"
+        "ua"        "Як увімкнути HTML MOTD?"
     }
 
     "MOTD_Step1"
     {
         "en"        "Enable developer console in Settings -> Keyboard -> Advanced"
         "ru"        "Включите консоль разработчика в Настройки -> Клавиатура -> Дополнительно"
+        "ua"        "Увімкніть консоль розробника у Налаштування -> Клавіатура -> Додатково"
     }
 
     "MOTD_Step2"
     {
         "en"        "Open developer console using tilda (~) button"
         "ru"        "Откройте консоль разработчика используя кнопку Тильда (~)"
+        "ua"        "Відкрийте консоль розробника використовуючи кнопку Тільда (~)"
     }
 
     "MOTD_Step3"
     {
         "en"        "Type in console cl_disablehtmlmotd 0"
         "ru"        "Введите в консоли cl_disablehtmlmotd 0"
+        "ua"        "Введіть в консолі cl_disablehtmlmotd 0"
     }
 
     "MOTD_Step4"
     {
         "en"        "Press button Enter"
         "ru"        "Нажмите кнопку Enter"
+        "ua"        "Натисніть кнопку Enter"
     }
 
     "MOTD_Exit"
     {
         "en"        "Close"
         "ru"        "Закрыть"
+        "ua"        "Закрити"
     }
 }
