@@ -87,6 +87,12 @@
     }
 
     // Chat messages
+    "ChatPrefix"
+    {
+        "en"        "[Radio] "
+        "ru"        "[Радио] "
+    }
+
     "NowPlaying"
     {
         "#format"   "{1:s},{2:d}"
