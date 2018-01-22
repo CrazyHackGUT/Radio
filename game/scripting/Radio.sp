@@ -13,7 +13,7 @@
 
 #define SZF(%0)         %0, sizeof(%0)
 
-public Plugin myinfo = { url = "https://kruzefag.ru/", name = "Radio", author = "CrazyHackGUT aka Kruzya", version = "1.3.2.1", description = "Radio plugin for all Source games"};
+public Plugin myinfo = { url = "https://kruzefag.ru/", name = "Radio", author = "CrazyHackGUT aka Kruzya", version = "1.3.2.2", description = "Radio plugin for all Source games"};
 
 /**
  * Global settings for all players

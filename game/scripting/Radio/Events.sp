@@ -49,8 +49,12 @@ public void OnMapStart() {
 
     // Some scratch.
     if (g_bFirstStart) {
-        for (int iClient = 1; iClient <= MaxClients; iClient++)
+        for (int iClient = 1; iClient <= MaxClients; iClient++) {
             UTIL_ClearSettings(iClient);
+            if (IsClientInGame(iClient)) {
+                OnClientPutInServer(iClient);
+            }
+        }
         g_bFirstStart = false;
     }
 }
