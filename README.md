@@ -1,6 +1,6 @@
 # Radio
 
-**Текущая версия**: _1.3.1_
+**Текущая версия**: _1.3.2.1_
 
 **Лицензия**: _[GNU GPL 3.0](https://github.com/CrazyHackGUT/Radio/blob/master/LICENSE)_
 
@@ -8,9 +8,9 @@
 
 - Скачать из [раздела релизов](https://github.com/CrazyHackGUT/Radio/releases) последнюю версию
 - Распаковать архив
-- Открыть конфиг, добавить свои радио-станции, по желанию изменить ссылку на вспомогательный "скрипт"
 - Скопировать все файлы, кроме **web_script.html** на сервер
 - Перезапустить сервер **ИЛИ** сменить карту **ИЛИ** выполнить в консоли сервера команду `sm plugins load Radio`
+- Открыть конфиг, добавить свои радио-станции, по желанию изменить ссылку на вспомогательный "скрипт"
 
 **Установка (веб-скрипт) (необязательно)**:
 
@@ -30,7 +30,8 @@
 **Удаление (плагин)**:
 
 - Удалить файлы:
-  - /addons/sourcemod/configs/Radio.cfg
+  - /cfg/sourcemod/radio.cfg
+  - /addons/sourcemod/data/Radio.cfg
   - /addons/sourcemod/plugins/Radio.smx
   - /addons/sourcemod/scripting/Radio.sp
   - /addons/sourcemod/translatons/Radio.phrases.txt
