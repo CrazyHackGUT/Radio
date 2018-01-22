@@ -117,9 +117,9 @@
 
     "UseRadioCommand"
     {
-        "en"        "{default}This server have radio plugin. Type {lightgreen}!radio{default} to chat!"
-        "ru"        "{default}На этом сервере есть Радио плагин. Введите {lightgreen}!radio{default} в чат!"
-        "ua"        "{default}На цьому сервері є Радіо плагін. Введіть {lightgreen}!radio{default} в чат!"
+        "en"        "This server have radio plugin. Type !radio to chat!"
+        "ru"        "На этом сервере есть Радио плагин. Введите !radio в чат!"
+        "ua"        "На цьому сервері є Радіо плагін. Введіть !radio в чат!"
     }
 
     "EnableMOTD"

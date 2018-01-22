@@ -54,7 +54,7 @@ void Menu_Draw_VM(int iClient) {
     hMenu.Display(iClient, 0);
 }
 
-void Menu_Draw_SM(int iClient) {
+void Menu_Draw_SM(int iClient, int iStartItem = -1) {
     if (MOTD_GetState(iClient) != Enabled) {
         PrintToChat(iClient, "[Radio] %t", "EnableMOTD");
         Menu_Draw_MOTDInstruction(iClient);
@@ -85,7 +85,10 @@ void Menu_Draw_SM(int iClient) {
         hMenu.AddItem(NULL_STRING, szBuffer, ((g_iSelected[iClient] == iID) ? ITEMDRAW_DISABLED : ITEMDRAW_DEFAULT));
     }
 
-    hMenu.Display(iClient, 0);
+    if (iStartItem == -1)
+        hMenu.Display(iClient, 0);
+    else
+        hMenu.DisplayAt(iClient, iStartItem, 0);
 }
 
 void Menu_Draw_MOTDInstruction(int iClient) {
@@ -165,7 +168,8 @@ public int SMHandler(Menu hMenu, MenuAction iAction, int iParam1, int iParam2) {
             MusicManager_ChangeStation(iParam1, iParam2 - 1);
         else
             MusicManager_ChangeStationMem(iParam1, iParam2 - 1);
-        Menu_Draw_MM(iParam1);
+        // Menu_Draw_MM(iParam1);
+        Menu_Draw_SM(iParam1, GetMenuSelectionPosition());
     }
 }
 

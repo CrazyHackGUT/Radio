@@ -22,6 +22,10 @@ void Timers_Stop() {
     }
 }
 
+void Timers_OnMapEnd() {
+    g_hAdvertTimer = g_hMotdTimer = null;
+}
+
 public Action NowPlaying(Handle hTimer) {
     char szBuffer[128];
 
