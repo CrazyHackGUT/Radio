@@ -60,4 +60,9 @@ public void OnClientPutInServer(int iClient) {
         return;
 
     MOTD_Check(iClient);
+    g_iVolume[iClient] = g_iDefaultVolume;
+}
+
+public void OnMapEnd() {
+    Timers_OnMapEnd();
 }

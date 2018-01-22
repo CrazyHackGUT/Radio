@@ -13,7 +13,7 @@
 
 #define SZF(%0)         %0, sizeof(%0)
 
-public Plugin myinfo = { url = "https://kruzefag.ru/", name = "Radio", author = "CrazyHackGUT aka Kruzya", version = "1.3.2", description = "Radio plugin for all Source games"};
+public Plugin myinfo = { url = "https://kruzefag.ru/", name = "Radio", author = "CrazyHackGUT aka Kruzya", version = "1.3.2.1", description = "Radio plugin for all Source games"};
 
 /**
  * Global settings for all players
@@ -33,7 +33,6 @@ float       g_fMOTDChecker;     // Periodic time for MOTD checker
 float       g_fAdvertTime;      // Advert periodic time
 bool        g_bFirstStart;      // scratch var.
 int         g_iStepSize;        // step size in Volume menu.
-                                // HERE
 
 #include "Radio/MusicManager.sp"
 #include "Radio/DisableMOTD.sp"
