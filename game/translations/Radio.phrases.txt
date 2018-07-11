@@ -23,6 +23,13 @@
         "ua"        "-=[ Радiо ]=-"
     }
 
+    "MMCSGO_Title"
+    {
+        "en"        "-=[ Radio ]=-\n \nNOTICE: If you use Panorama UI,\nRadio may be not work!"
+        "ru"        "-=[ Радио ]=-\n \nУВЕДОМЛЕНИЕ: Если Вы используете Panorama UI,\nРадио может не работать!"
+        // we need Ukrainian translate.
+    }
+
     "MM_Volume"
     {
         "#format"   "{1:d}"

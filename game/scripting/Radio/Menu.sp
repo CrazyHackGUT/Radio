@@ -8,7 +8,7 @@ void Menu_Draw_MM(int iClient) {
     char szBuffer[256];
     Menu hMenu = new Menu(MMHandler);
 
-    hMenu.SetTitle("%T", "MM_Title", iClient);
+    hMenu.SetTitle("%T", Game_GetEngine() == GAME_CSGO ? "MMCSGO_Title" : "MM_Title", iClient);
     hMenu.ExitButton = true;
 
     // Volume

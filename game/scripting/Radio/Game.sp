@@ -12,11 +12,9 @@ void Game_DetectEngine() {
         LogError("[Engine Detect] Unknown game. Radio plugin maybe can't work. Report this information to author: https://crazyhackgut.ru/");
     }
 
-    /**
     if (g_iEngine == GAME_CSGO) {
-        SetFailState("[Engine Detect] Sorry, but Valve fucked CS:GO compatibility. Please, wait a fix. Thanks!");
+        LogError("[Engine Detect] NOTICE: Valve fucked CS:GO compatibility. In Panorama update he deleted MOTD.");
     }
-    */
 }
 
 bool Game_GetBaseURL(char[] szOutput, int iMaxLength) {
