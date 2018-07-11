@@ -1,6 +1,6 @@
 # Radio
 
-**Текущая версия**: _1.3.2.1_
+**Текущая версия**: _1.3.2.2_
 
 **Лицензия**: _[GNU GPL 3.0](https://github.com/CrazyHackGUT/Radio/blob/master/LICENSE)_
 
