@@ -14,13 +14,14 @@ void Game_DetectEngine() {
 
     if (g_iEngine == GAME_CSGO) {
         LogError("[Engine Detect] NOTICE: Valve fucked CS:GO compatibility. In Panorama update he deleted MOTD.");
+        LogError("[Engine Detect] NOTICE: Uninstall this plugin. Now it's fully broken in CS:GO.");
+        SetFailState("Valve fucked CS:GO compability.");
     }
 }
 
 bool Game_GetBaseURL(char[] szOutput, int iMaxLength) {
     switch (g_iEngine) {
         case GAME_OLD:                      return Game_Old_GetBaseURL(szOutput, iMaxLength);
-        case GAME_CSGO:                     return Game_CSGO_GetBaseURL(szOutput, iMaxLength);
         case GAME_ORANGEBOX, GAME_UNKNOWN:  return Game_Generic_GetBaseURL(szOutput, iMaxLength);
     }
 

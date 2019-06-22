@@ -22,15 +22,11 @@ if ($_GET['engine'] == "old") {
     <param name="FlashVars" value="mp3=<?= $station; ?>&autoplay=1&volume=<?= intval($volume * 100); ?>" />
 </object>
 <?php } else {
-?><!-- Orange Box / CSGO -->
+?><!-- Orange Box -->
 <audio id="hPlayer" autoplay></audio>
 
 <script type="text/javascript">
     var hAudioPlayer = document.getElementById("hPlayer");
-<?php if ($engine == "csgo") { ?>
-    hAudioPlayer.volume = <?= $volume; ?>;
-    hAudioPlayer.src    = "<?= $station; ?>";
-<?php } else if ($engine == "orangebox") { ?>
     var Volume = 1.0;
 
     function ParseVolume(volume) {
@@ -50,6 +46,5 @@ if ($_GET['engine'] == "old") {
     }
 
     window.onhashchange(null);
-<?php } ?>
 </script><?php
 }
