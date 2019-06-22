@@ -27,7 +27,7 @@ void Timers_OnMapEnd() {
 }
 
 public Action NowPlaying(Handle hTimer) {
-    char szBuffer[128];
+    char szBuffer[192];
 
     for (int iPlayer = 1; iPlayer <= MaxClients; iPlayer++) {
         if (IsClientInGame(iPlayer) && !IsFakeClient(iPlayer) && !g_bSilence[iPlayer]) {
